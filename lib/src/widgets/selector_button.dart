@@ -38,20 +38,24 @@ class SelectorButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return selectorConfig.selectorType == PhoneInputSelectorType.DROPDOWN
         ? countries.isNotEmpty && countries.length > 1
-            ? DropdownButtonHideUnderline(
-                child: DropdownButton<Country>(
-                  key: Key(TestHelper.DropdownButtonKeyValue),
-                  hint: Item(
-                    country: country,
-                    showFlag: selectorConfig.showFlags,
-                    useEmoji: selectorConfig.useEmoji,
-                    leadingPadding: selectorConfig.leadingPadding,
-                    trailingSpace: selectorConfig.trailingSpace,
-                    textStyle: selectorTextStyle,
+            ? Container(
+                width: 140,
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<Country>(
+                    isExpanded: true,
+                    key: Key(TestHelper.DropdownButtonKeyValue),
+                    hint: Item(
+                      country: country,
+                      showFlag: selectorConfig.showFlags,
+                      useEmoji: selectorConfig.useEmoji,
+                      leadingPadding: selectorConfig.leadingPadding,
+                      trailingSpace: selectorConfig.trailingSpace,
+                      textStyle: selectorTextStyle,
+                    ),
+                    value: country,
+                    items: mapCountryToDropdownItem(countries),
+                    onChanged: isEnabled ? onCountryChanged : null,
                   ),
-                  value: country,
-                  items: mapCountryToDropdownItem(countries),
-                  onChanged: isEnabled ? onCountryChanged : null,
                 ),
               )
             : Item(
@@ -84,7 +88,7 @@ class SelectorButton extends StatelessWidget {
                   }
                 : null,
             child: Padding(
-              padding: const EdgeInsets.only(right: 8.0),
+              padding: const EdgeInsets.only(right: 5.0),
               child: Item(
                 country: country,
                 showFlag: selectorConfig.showFlags,

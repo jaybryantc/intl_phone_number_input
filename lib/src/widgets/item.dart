@@ -44,7 +44,9 @@ class Item extends StatelessWidget {
           Text(
             '$dialCode',
             textDirection: TextDirection.ltr,
-            style: textStyle,
+            style: textStyle?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ],
       ),
