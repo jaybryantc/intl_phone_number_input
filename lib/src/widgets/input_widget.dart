@@ -295,11 +295,13 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
             ),
             labelText: 'Phone Number',
             labelStyle: TextStyle(
-              fontSize: 13,
+              fontSize: 15,
+              color: Color(0XFFC2C2C2),
             ),
             hintText: 'Enter your phone number',
             hintStyle: TextStyle(
               fontSize: 15,
+              color: Color(0XFFC2C2C2),
             ),
             floatingLabelBehavior: FloatingLabelBehavior.always);
 
@@ -408,7 +410,7 @@ class _InputWidgetView
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8)),
         border: Border.all(
-          color: Colors.grey,
+          color: Color(0xFFE6E0E9),
         ),
         color: const Color(0xFFFAFAFA),
       ),
@@ -431,7 +433,7 @@ class _InputWidgetView
             ),
           ],
           Container(
-            color: Colors.grey,
+            color: const Color(0xFFE6E0E9),
             width: 1,
           ),
           Expanded(
