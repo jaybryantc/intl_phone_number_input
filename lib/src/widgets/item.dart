@@ -29,27 +29,27 @@ class Item extends StatelessWidget {
     if (trailingSpace) {
       dialCode = dialCode.padRight(5, "   ");
     }
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          SizedBox(width: leadingPadding),
-          _Flag(
-            country: country,
-            showFlag: showFlag,
-            useEmoji: useEmoji,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        // SizedBox(width: leadingPadding),
+        _Flag(
+          country: country,
+          showFlag: showFlag,
+          useEmoji: useEmoji,
+        ),
+        SizedBox(width: 6.0),
+        Text(
+          '$dialCode',
+          textDirection: TextDirection.ltr,
+          style: textStyle?.copyWith(
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
           ),
-          SizedBox(width: 12.0),
-          Text(
-            '$dialCode',
-            textDirection: TextDirection.ltr,
-            style: textStyle?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
+        ),
+        SizedBox(width: 2.0),
+      ],
     );
   }
 }
