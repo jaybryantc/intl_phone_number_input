@@ -286,24 +286,25 @@ class _InputWidgetState extends State<InternationalPhoneNumberInput> {
   InputDecoration getInputDecoration(InputDecoration? decoration) {
     InputDecoration value = decoration ??
         InputDecoration(
-            alignLabelWithHint: true,
-            border: const OutlineInputBorder(
-              borderSide: BorderSide.none,
-            ),
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 8,
-            ),
-            labelText: 'Phone Number',
-            labelStyle: TextStyle(
-              fontSize: 15,
-              color: Color(0XFFC2C2C2),
-            ),
-            hintText: 'Enter your phone number',
-            hintStyle: TextStyle(
-              fontSize: 15,
-              color: Color(0XFFC2C2C2),
-            ),
-            floatingLabelBehavior: FloatingLabelBehavior.always);
+          alignLabelWithHint: true,
+          border: const OutlineInputBorder(
+            borderSide: BorderSide.none,
+          ),
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: 8,
+          ),
+          labelText: 'Phone Number',
+          labelStyle: TextStyle(
+            fontSize: 15,
+            color: Color(0XFFC2C2C2),
+          ),
+          hintText: 'Enter your phone number',
+          hintStyle: TextStyle(
+            fontSize: 14.5,
+            color: Color(0XFFC2C2C2),
+          ),
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+        );
 
     if (widget.selectorConfig.setSelectorButtonAsPrefixIcon) {
       return value.copyWith(
