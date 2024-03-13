@@ -72,8 +72,10 @@ class SelectorButton extends StatelessWidget {
               )
         : MaterialButton(
             key: Key(TestHelper.DropdownButtonKeyValue),
-            padding: EdgeInsets.zero,
-            minWidth: 0,
+            padding: const EdgeInsets.only(
+              left: 10,
+            ),
+            // minWidth: 0,
             onPressed: countries.isNotEmpty && countries.length > 1 && isEnabled
                 ? () async {
                     Country? selected;
@@ -91,16 +93,28 @@ class SelectorButton extends StatelessWidget {
                     }
                   }
                 : null,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 5.0),
-              child: Item(
-                country: country,
-                showFlag: selectorConfig.showFlags,
-                useEmoji: selectorConfig.useEmoji,
-                leadingPadding: selectorConfig.leadingPadding,
-                trailingSpace: selectorConfig.trailingSpace,
-                textStyle: selectorTextStyle,
-              ),
+            child: Row(
+              children: [
+                Image.asset(
+                  country?.flagUri ?? '',
+                  height: 21.0,
+                  width: 35.0,
+                  fit: BoxFit.fill,
+                  package: 'intl_phone_number_input',
+                  errorBuilder: (context, error, stackTrace) {
+                    return SizedBox.shrink();
+                  },
+                ),
+                SizedBox(width: 5),
+                Text(
+                  country?.dialCode ?? '',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(width: 5),
+                Icon(Icons.expand_more),
+              ],
             ),
           );
   }
@@ -178,8 +192,8 @@ class SelectorButton extends StatelessWidget {
                       color: Theme.of(context).canvasColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(12),
-                          topRight: Radius.circular(12),
+                          topLeft: Radius.circular(16),
+                          topRight: Radius.circular(16),
                         ),
                       ),
                     ),

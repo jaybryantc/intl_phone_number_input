@@ -60,29 +60,59 @@ class _CountrySearchListWidgetState extends State<CountrySearchListWidget> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+        //   child: TextFormField(
+        //     key: Key(TestHelper.CountrySearchInputKeyValue),
+        //     decoration: getSearchBoxDecoration(),
+        //     controller: _searchController,
+        //     autofocus: widget.autoFocus,
+        //     onChanged: (value) {
+        //       final String value = _searchController.text.trim();
+        //       return setState(
+        //         () => filteredCountries = Utils.filterCountries(
+        //           countries: widget.countries,
+        //           locale: widget.locale,
+        //           value: value,
+        //         ),
+        //       );
+        //     },
+        //   ),
+        // ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: TextFormField(
-            key: Key(TestHelper.CountrySearchInputKeyValue),
-            decoration: getSearchBoxDecoration(),
-            controller: _searchController,
-            autofocus: widget.autoFocus,
-            onChanged: (value) {
-              final String value = _searchController.text.trim();
-              return setState(
-                () => filteredCountries = Utils.filterCountries(
-                  countries: widget.countries,
-                  locale: widget.locale,
-                  value: value,
+          padding: const EdgeInsets.all(24),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Choose your country',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFF4E5663),
                 ),
-              );
-            },
+              ),
+              InkWell(
+                onTap: () => Navigator.pop(context),
+                child: Icon(
+                Icons.close,
+                size: 20,
+              ),
+              ),
+              
+            ],
           ),
+        ),
+        Container(
+          color: const Color(0xFFC2C2C2),
+          height: 1,
+          margin: const EdgeInsets.fromLTRB(24, 0, 24, 15),
         ),
         Flexible(
           child: ListView.builder(
             controller: widget.scrollController,
             shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             itemCount: filteredCountries.length,
             itemBuilder: (BuildContext context, int index) {
               Country country = filteredCountries[index];
@@ -148,24 +178,40 @@ class DirectionalCountryListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: EdgeInsets.zero,
       key: Key(TestHelper.countryItemKeyValue(country.alpha2Code)),
       leading: (showFlags ? _Flag(country: country, useEmoji: useEmoji) : null),
       title: Align(
         alignment: AlignmentDirectional.centerStart,
-        child: Text(
-          '${Utils.getCountryName(country, locale)}',
-          textDirection: Directionality.of(context),
-          textAlign: TextAlign.start,
+        child: RichText(
+          text: TextSpan(
+            text: '${Utils.getCountryName(country, locale)}',
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              color: const Color(0xFF4E5663),
+            ),
+            children: [
+              TextSpan(
+                text: ' (${country.dialCode ?? ''})',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-      subtitle: Align(
-        alignment: AlignmentDirectional.centerStart,
-        child: Text(
-          '${country.dialCode ?? ''}',
-          textDirection: TextDirection.ltr,
-          textAlign: TextAlign.start,
-        ),
-      ),
+      // subtitle: Align(
+      //   alignment: AlignmentDirectional.centerStart,
+      //   child: Text(
+      //     '${country.dialCode ?? ''}',
+      //     textDirection: TextDirection.ltr,
+      //     textAlign: TextAlign.start,
+      //   ),
+      // ),
       onTap: () => Navigator.of(context).pop(country),
     );
   }
@@ -187,13 +233,23 @@ class _Flag extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineSmall,
                   )
                 : country?.flagUri != null
-                    ? CircleAvatar(
-                        backgroundImage: AssetImage(
-                          country!.flagUri,
-                          package: 'intl_phone_number_input',
-                        ),
+                    ? Image.asset(
+                        country!.flagUri,
+                        width: 35.0,
+                        height: 21,
+                        package: 'intl_phone_number_input',
+                        errorBuilder: (context, error, stackTrace) {
+                          return SizedBox.shrink();
+                        },
                       )
                     : SizedBox.shrink(),
+            // ? CircleAvatar(
+            //     backgroundImage: AssetImage(
+            //       country!.flagUri,
+            //       package: 'intl_phone_number_input',
+            //     ),
+            //   )
+            // : SizedBox.shrink(),
           )
         : SizedBox.shrink();
   }
